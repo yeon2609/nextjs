@@ -1,19 +1,31 @@
 "use client"
 
+import { useState } from "react";
+import { Heart } from 'lucide-react';
+
+// 1. counter - 0 + 5이상 green, -5이하 red, 나머지 black
+// 2. 하트 누르면 꽉찬거 다시누르면 빈하트 만들기
+
 const Page = () => {
 
-  const test = () => {
-    alert("다까먹음 ㅎㅎ")
+  const [num, setNum] = useState(0);
+  const plus = () => {
+    setNum((x) => x + 1)
+  }
+  const minus = () => {
+    setNum((x) => x - 1)
   }
 
-  const test1 = () => {
-    console.log("수업 언제끝남?")
-  }
+  const [fill, setfill] = useState(false)
 
-  return<>
-    <button onClick={test}>0</button>
-    <button onClick={test1}>on</button>
-  </> 
+  return <>
+    <button onClick={minus}>-</button>
+    <span style={{color: num >= 5 ? 'green' : num <= -5 ? 'red' : 'black'}}>{num}</span>
+    <button onClick={plus}>+</button>
+
+    <Heart fill={fill ? 'red' : 'white'} onClick={() => setfill((x) => !x)}/>
+
+  </>
   
 }
  
