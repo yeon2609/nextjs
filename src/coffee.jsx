@@ -7,7 +7,7 @@ import { useState } from "react";
   // 바닐라 3500원 추가
   // 총 금액 : 0원
 
-const Page = () => {
+const Coffee = () => {
   
   const [total, setTotal] = useState(0)
   const americano = () => {
@@ -31,4 +31,4 @@ const Page = () => {
   
 }
  
-export default Page;
+export default Coffee;

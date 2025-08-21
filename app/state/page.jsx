@@ -1,30 +1,28 @@
 "use client"
 
 import { useState } from "react";
-import { Heart } from 'lucide-react';
-
-// 1. counter - 0 + 5이상 green, -5이하 red, 나머지 black
-// 2. 하트 누르면 꽉찬거 다시누르면 빈하트 만들기
+import { Trash } from 'lucide-react';
 
 const Page = () => {
 
-  const [num, setNum] = useState(0);
-  const plus = () => {
-    setNum((x) => x + 1)
-  }
-  const minus = () => {
-    setNum((x) => x - 1)
-  }
-
-  const [fill, setfill] = useState(false)
-
+  const [inputData, setInputData] = useState('')
+  const [check, setCheck] = useState([''])
+  
   return <>
-    <button onClick={minus}>-</button>
-    <span style={{color: num >= 5 ? 'green' : num <= -5 ? 'red' : 'black'}}>{num}</span>
-    <button onClick={plus}>+</button>
-
-    <Heart fill={fill ? 'red' : 'white'} onClick={() => setfill((x) => !x)}/>
-
+    <div>
+      <input onChange={(e) => setInputData((prev) => e.target.value)} className="border-2 border-red-100" type="text" />
+      <button onClick={() => setCheck((prev) => [...prev, inputData])} className="bg-sky-100 p-1">입력</button>
+    </div>
+    <div className="flex flex-col">
+      <span>오늘 할일</span>
+      {check.map((v, i) => (
+        <div className="flex gap-2" key={i}>
+          <span className="text-sky-300" >{v}</span>
+          <Trash onClick={() => setCheck((prev) => [...prev].filter((x) => x != v))}/>
+        </div>
+      ))}
+    </div>
+    
   </>
   
 }
